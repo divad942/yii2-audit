@@ -100,7 +100,7 @@ class AuditEntry extends ActiveRecord
      */
     public function getData()
     {
-        return static::hasMany(AuditData::className(), ['entry_id' => 'id'])->indexBy('type');
+        return static::hasMany(AuditData::className(), ['entry_id' => 'id'])->select(['id','entry_id','type','CAST(data as NVARCHAR(MAX)) as data','created'])->indexBy('type');
     }
 
     /**
@@ -121,7 +121,7 @@ class AuditEntry extends ActiveRecord
         // so that they can be bound right before insert and still get escaped correctly
         foreach ($batchData as $type => $data) {
             $param = ':data_' . str_replace('/', '_', $type);
-            $rows[] = [$this->id, $type, $date, new Expression($param)];
+            $rows[] = [$this->id, $type, $date, new Expression('CAST( ' . $param . ' AS VARBINARY(MAX))')];
             $params[$param] = [Helper::serialize($data, $compact), \PDO::PARAM_LOB];
         }
         static::getDb()->createCommand()->batchInsert(AuditData::tableName(), $columns, $rows)->bindValues($params)->execute();
@@ -140,6 +140,7 @@ class AuditEntry extends ActiveRecord
             'entry_id' => $this->id,
             'type' => $type,
             'created' => date('Y-m-d H:i:s'),
+            // 'data' => Helper::serialize($data, $compact), // DISABLE PDO:PARAM_LOB -> yii will cast to VARBINARY
             'data' => [Helper::serialize($data, $compact), \PDO::PARAM_LOB],
         ];
         static::getDb()->createCommand()->insert(AuditData::tableName(), $record)->execute();
