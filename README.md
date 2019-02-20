@@ -1,6 +1,6 @@
 # Yii2 Audit
 
-# This if fork of [bedezign/yii2-audit](https://github.com/bedezign/yii2-audit)
+# This is fork of [bedezign/yii2-audit](https://github.com/bedezign/yii2-audit)
 ## Partially fixed audit_data compression issues on MS SQL database. This fork works only on MS SQL!
 
 [![Join Chat](https://img.shields.io/badge/gitter-join%20chat-blue.svg?style=flat-square)](https://gitter.im/bedezign/yii2-audit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
