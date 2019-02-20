@@ -16,7 +16,7 @@ class m150626_000005_create_audit_javascript extends Migration
             'type'       => Schema::TYPE_STRING . '(20) NOT NULL',
             'message'    => Schema::TYPE_TEXT . ' NOT NULL',
             'origin'     => Schema::TYPE_STRING . '(512)',
-            'data'       => Schema::TYPE_BINARY,
+            'data'       => Schema::TYPE_TEXT,
         ], $this->db->driverName === 'mysql' ? 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB' : null);
 
         if ($this->db->driverName != 'sqlite') {

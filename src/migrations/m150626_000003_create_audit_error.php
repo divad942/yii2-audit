@@ -18,7 +18,7 @@ class m150626_000003_create_audit_error extends Migration
             'code'       => Schema::TYPE_INTEGER . " DEFAULT '0'",
             'file'       => Schema::TYPE_STRING . '(512)',
             'line'       => Schema::TYPE_INTEGER ,
-            'trace'      => Schema::TYPE_BINARY,
+            'trace'      => Schema::TYPE_TEXT,
             'hash'       => Schema::TYPE_STRING . '(32)',
             'emailed'    => Schema::TYPE_BOOLEAN . " NOT NULL DEFAULT '0'",
         ], ($driver === 'mysql' ? 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB' : null));
